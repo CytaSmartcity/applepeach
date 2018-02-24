@@ -198,8 +198,8 @@ if __name__ == "__main__":
             # CV2
             nparr = np.fromstring(img_str, np.uint8)
             img_np = cv2.imdecode(nparr, cv2.IMREAD_COLOR) # cv2.IMREAD_COLOR in OpenCV 3.1
-            cv2.imshow('image',img_np)
-            cv2.waitKey(1)
+            #cv2.imshow('image',img_np)
+            #cv2.waitKey(1)
             cv2.imwrite('test.png',img_np)
             r = detect(net, meta, 'test.png', thresh=.2)    
             print r
@@ -211,17 +211,19 @@ if __name__ == "__main__":
                 else:
                     s[ob] = s[ob]+1
                 rec=d[2]
-                # p1 = (int(rec[0]),int(rec[1]))
+                p = (int(rec[0]),int(rec[1]))
                 p1 = (int(rec[0]-(rec[2]/2)),int(rec[1]-(rec[3]/2)))
                 p2 = (int(rec[0]+(rec[2]/2)),int(rec[1]+(rec[3]/2)))
                 cv2.rectangle(img_np,p1,p2,(0,255,0),3)
+                font = cv2.FONT_HERSHEY_SIMPLEX
+                cv2.putText(img_np,ob,p2, font, 0.4,(0,255,255),1,cv2.LINE_AA)
             print s
             cv2.imshow('image',img_np)
 
             s['timestamp'] = current_milli_time() 
 
             # Pass the user's idToken to the push method    
-            results = db.child("drone1").push(s,user['idToken'])  
+            results = db.child("droneStats").child("NissiBeach").update(s,user['idToken'])  
             cv2.waitKey(1)
         except Exception as e:
             print(e)
