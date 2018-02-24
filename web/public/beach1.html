@@ -24,8 +24,6 @@
 
 	<script src="https://www.gstatic.com/firebasejs/4.9.0/firebase.js"></script>
 
-	<script src="./node_modules/watson-developer-cloud/index.js"></script>
-
 </head>
 
 <nav class="navbar navbar-expand-lg navbar-light bg-faded">
@@ -59,45 +57,42 @@
 	
 </nav>
 
-<body style="background-color: #C2B280;">
+<body >
 
 
 	<div class="bg3" style="width: 100%;">
 			
-			
-			
 	</div>
-
 		
 	<div class="row" style="width:100%;">
 		<div class="col-md-2" style="margin: 0 auto; padding: 20px;">
 				
 			<div class="text-center" style="padding: 20px;">
 				<h3>Capacity</h3>
-				<h5>22%</h5>
+				<h5 id="beach_capacity">22%</h5>
 				
 				<span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
 				
 				<h3>Weather</h3>
-				<h5>33°C</h5>
+				<h5 id="temperature">33°C</h5>
 				
 				<span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
 				
 				<h3>Sunbeds</h3>
-				<h5>38%</h5>
+				<h5 id="sunbeds_capacity">38%</h5>
 				
 			</div>
 		</div>
 		<div class="col-md-8">
 			<video style="margin:0 auto; width:100%;" align="center" width="640" height="480" autoplay loop>
-				<source src="mov_bbb.mp4" type="video/mp4">
+				<source src="https://firebasestorage.googleapis.com/v0/b/applepeachandroid.appspot.com/o/recorded%2Fsmall.mp4?alt=media&token=847eec87-235d-4698-9a86-cfc15b4f0abe" type="video/mp4">
 			</video>
 		</div>
 		<div class="col-md-2" style="margin: 0 auto; padding: 20px;">
 				
 			<div class="text-center" style="padding: 20px;">
 				<h3>Sunbeds</h3>
-				<button type="button" class="btn btn-primary" onclick="'window.location.href='new.html'" style="background-color: #0099cc !important; border-color: #0099cc !important;">Book Now</button>
+				<a href="book.html"><button type="button" class="btn btn-primary" style="background-color: #0099cc !important; border-color: #0099cc !important;">Book Now</button></a>
 				</br>
 				</br>
 				<h3>Photo</h3>
@@ -109,27 +104,51 @@
 	</div>
 	
 	
-	<div class="bg3" style="width: 100%;">
-			
-			
-			
-		</div>
-	</div>
-	
-	<div class="bg4">
-	</div>
-	
 	<script>
 	  // Initialize Firebase
 	  // TODO: Replace with your project's customized code snippet
 	  var config = {
-		apiKey: "AIzaSyDdgJPulZOjZjbumNwj7ctM0n4rTpcazog",
-		authDomain: "asfalistis-752e5.firebaseapp.com",
-		databaseURL: "https://asfalistis-752e5.firebaseio.com/",
-		storageBucket: "<BUCKET>.appspot.com",
+		apiKey: "AIzaSyA7ndgXlwJ40VxblATilxbzcBv2JzAMjhU",
+		authDomain: "applepeachandroid.firebaseapp.com",
+		databaseURL: "https://applepeachandroid.firebaseio.com/",
+		storageBucket: "gs://applepeachandroid.appspot.com",
 		messagingSenderId: "<SENDER_ID>",
 	  };
 	  firebase.initializeApp(config);
+	  var database = firebase.database();
+	  var ref1 = database.ref('beachStats/NissiBeach/temperature');
+	  ref1.on('value', function(snapshot) {
+		var kk1 = snapshot.val();
+		$("#temperature").text(kk1 + "°C");
+	  });
+	  
+	  var ref3 = database.ref('beachStats/NissiBeach/beach_capacity');
+	  ref3.on('value', function(snapshot) {
+		
+		var kk1 = snapshot.val() * 100;
+		$("beach_capacity").text(kk1 + "%");
+	  });
+	  
+	  capacity();
+	  
+	  function capacity(){
+			var counter = 0;
+			var countbeds = 0;
+		  var ref = database.ref('bookings/NissiBeach');
+		  ref.once('value', function(snapshot) {
+			snapshot.forEach(function(childSnapshot) {
+				counter++;
+				if (childSnapshot.val() == "1") {
+					countbeds ++;
+					//window.alert(childSnapshot.val());
+				}
+			});
+			var fk = countbeds / counter * 100;
+			$("#sunbeds_capacity").text(fk.toFixed(1)+"%");
+		  });
+		  
+		  
+	  }
 	  
 	</script>
 	
@@ -139,7 +158,6 @@
 		firebase.auth().onAuthStateChanged(function(user) {
 		  if (user) {
 			// User is signed in.
-			
 			$("#user").text(user.email);
 			
 			$("#signin").hide();
