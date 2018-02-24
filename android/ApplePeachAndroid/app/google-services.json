@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "438507342563",
+    "firebase_url": "https://applepeachandroid.firebaseio.com",
+    "project_id": "applepeachandroid",
+    "storage_bucket": "applepeachandroid.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:438507342563:android:199ae261269aec6f",
+        "android_client_info": {
+          "package_name": "com.peach.apple.applepeach"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "438507342563-2jkcu524785egk9qqhrp3401hq3u0buc.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.peach.apple.applepeach",
+            "certificate_hash": "f99279f554456c612f32c95256638426c6a1813d"
+          }
+        },
+        {
+          "client_id": "438507342563-sp2h9lhb0qbj4agsinf3g89tb9j99vrc.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCROgjo6vWMsn1ICaOYiunYzU2apmubQiI"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "438507342563-sp2h9lhb0qbj4agsinf3g89tb9j99vrc.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
