@@ -1,5 +1,6 @@
 package com.peach.apple.applepeach;
 
+import android.net.Uri;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -7,6 +8,8 @@ import android.util.Log;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
@@ -15,12 +18,15 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.UploadTask;
+
+import java.io.File;
 
 public class MainActivity extends AppCompatActivity {
 
     public static FirebaseAuth mAuth;
     private static FirebaseUser currentUser;
-    private StorageReference mStorageRef;
+    private StorageReference storageRef;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,21 +35,44 @@ public class MainActivity extends AppCompatActivity {
 
 
         mAuth = FirebaseAuth.getInstance();
-        mStorageRef = FirebaseStorage.getInstance().getReference();
         FirebaseUser currentUser = mAuth.getCurrentUser();
 
         if(currentUser == null)
             signIn();
 
-        // Write a message to the database
-        FirebaseDatabase database = FirebaseDatabase.getInstance();
-        DatabaseReference myRef = database.getReference("message");
+        storageRef = FirebaseStorage.getInstance().getReference();
 
-        myRef.setValue("Hello, World!");
+        // Write a message to the database
+        //FirebaseDatabase database = FirebaseDatabase.getInstance();
+        //DatabaseReference myRef = database.getReference("message");
+        //myRef.setValue("Hello, World!");
+        uploadFile("drawable/","drone.png","testing");
     }
 
+    //"path/to/images/rivers.jpg"
+    private void uploadFile(String localPathname,String filename,String storagePath){
+        //Uri file = Uri.fromFile(new File(localPathname+filename));
+        Uri uri = Uri.parse("android.resource://com.peach.apple.applepeach/drawable/drone");
+        StorageReference riversRef = storageRef.child(storagePath+"/"+filename);
 
-    
+        riversRef.putFile(uri)
+                .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                    @Override
+                    public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                        // Get a URL to the uploaded content
+                        Uri downloadUrl = taskSnapshot.getDownloadUrl();
+                        Toast.makeText(MainActivity.this, "Uploaded file!",
+                                Toast.LENGTH_SHORT).show();
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception exception) {
+                        Toast.makeText(MainActivity.this, "Unsucessful file upload!",
+                                Toast.LENGTH_SHORT).show();
+                    }
+                });
+    }
 
 
     private void signUp(){
@@ -69,7 +98,7 @@ public class MainActivity extends AppCompatActivity {
                 });
     }
 
-    public void signIn(){
+    private void signIn(){
         mAuth.signInWithEmailAndPassword("abcd@gmail.com", "123456")
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                     @Override
