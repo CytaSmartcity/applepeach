@@ -1,0 +1,243 @@
+
+
+
+<html>
+
+<head>
+
+	<title>Asfalistis.com.cy</title>
+
+	<link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+	
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-social/5.1.1/bootstrap-social.min.css" integrity="sha256-rFMLRbqAytD9ic/37Rnzr2Ycy/RlpxE5QH52h7VoIZo=" crossorigin="anonymous" />
+	
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+	
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-social/5.1.1/bootstrap-social.min.css" integrity="sha256-rFMLRbqAytD9ic/37Rnzr2Ycy/RlpxE5QH52h7VoIZo=" crossorigin="anonymous" />
+	
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+	
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+	
+	<script src="https://www.gstatic.com/firebasejs/4.9.0/firebase.js"></script>
+	
+	<script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+
+		<style>
+		.bg { 
+			/* The image used */
+			background-image: url("city_tran2.jpg");
+
+			/* Full height */
+			width: 100%; 
+			height: 100%; 
+
+			/* Center and scale the image nicely */
+			background-position: center;
+			background-repeat: no-repeat;
+			background-size: cover;
+		}
+		
+		.tagg:hover {
+			transform: translateX(-25%) translateY(-25%);
+			-webkit-transform: scale(1.02,1.02);
+			-webkit-transition: all 0.15s ease-in-out;
+		}
+
+		.tagg {
+			animation-delay: 2s;
+		
+			animation: bummer 0.5s;
+			transform: scale(0,0);
+			animation-fill-mode: forwards;
+			
+			-webkit-animation: bummer 0.5s;
+			-webkit-transform: scale(0,0); 
+			-webkit-animation-fill-mode: forwards;
+		}
+
+		@keyframes bummer {
+			100% {
+				transform: scale(1,1); 
+			}
+		}
+
+	</style>
+	
+</head>
+
+<nav class="navbar navbar-expand-lg navbar-light bg-faded" style="">
+	<a class="navbar-brand" href="index.html">Asfalistis.com.cy</a>
+	<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+		<span class="navbar-toggler-icon"></span>
+	</button>
+	<div id="navbarNavDropdown" class="navbar-collapse collapse">
+		<ul class="navbar-nav mr-auto">
+			<li class="nav-item">
+				<a class="nav-link" href="new.html">Ασφαλιση</a>
+			</li>
+			<li class="nav-item">
+				<a class="nav-link" href="#">Υποβολη Claim</a>
+			</li>
+			<li class="nav-item">
+				<a class="nav-link" href="#">Βοηθεια</a>
+			</li>
+
+		</ul>
+		<ul class="navbar-nav">
+			<li class="nav-item">
+				<a id="signin" class="nav-link" href="sign.html">Συνδεση</a>
+				<a id="user" class="nav-link" href="#" style="display: none;">Χρηστης</a>
+			</li>
+			<li class="nav-item">
+				<a id="register" class="nav-link" href="register.html">Εγγραφη</a>
+				<a id="logout" class="nav-link" href="#" style="display: none;">Αποσυνδεση</a>
+			</li>
+		</ul>
+	</div>
+</nav>
+
+<body>
+	
+	<div id="helll" class="bg" style="width:100%; height:100%; display: flex; align-items: center; justify-content: center;">
+		<div style="position:absolute; background-color: white; border-radius: 15px; padding: 20px; z-index: 10;">
+			<div style="display: flex;">
+				<textarea id="input" class="form-control" rows="1" style="width: 240px; margin:10px;"></textarea>
+				<div class="" style="padding:24px; margin-left:-60px;">
+					<span class="fa fa-microphone" style=" "></span>
+				</div>
+				<button id="send" class="btn btn-default" style="margin:10px;">
+					<span class="fa fa-paper-plane" style=" "></span>
+				</button>
+			</div>
+		</div>
+		<div id="cake2" style="position:absolute; background-color: rgba(1,1,1,0.3); margin-top: -140px; border-radius: 15px; padding: 20px; z-index: 10;">
+			<div id="cake" style="padding:12px; text-align:center; color: white; font-size:2em;">Καλοσωρησατε στο αυτοματο ασφαλιστη!</div>
+		</div>
+		
+		<div>
+			<img style="position:absolute; margin-left: 340px; margin-top: -240px;" width="auto" height="460" src="boy_flip.png"/>
+		</div>
+	</div>
+		
+		<script>
+		  // Initialize Firebase
+		  // TODO: Replace with your project's customized code snippet
+		  var config = {
+			apiKey: "AIzaSyDdgJPulZOjZjbumNwj7ctM0n4rTpcazog",
+			authDomain: "asfalistis-752e5.firebaseapp.com",
+			databaseURL: "https://asfalistis-752e5.firebaseio.com/",
+			storageBucket: "<BUCKET>.appspot.com",
+			messagingSenderId: "<SENDER_ID>",
+		  };
+		  firebase.initializeApp(config);
+		</script>
+		
+		<script>
+		
+		var userr;
+		
+		firebase.auth().onAuthStateChanged(function(user) {
+		  if (user) {
+			// User is signed in.
+			
+			$("#user").text(user.email);
+			
+			$("#signin").hide();
+			$("#register").hide();
+			$("#user").show();
+			$("#logout").show();
+			
+			userr = user.uid;
+		  } else {
+			// No user is signed in.
+		  }
+		});
+		
+		$( "#logout" ).click(function() {
+			firebase.auth().signOut().then(function() {
+			  console.log('Signed Out');
+			  location.reload();
+			}, function(error) {
+			  console.error('Sign Out Error', error);
+			});
+		});
+
+		</script>
+	
+		<script type="text/javascript">
+			var accessToken = "47ea62a03d9c4d0587c8d0548f50d338";
+			var baseUrl = "https://api.api.ai/v1/";
+			$(document).ready(function() {
+				$("#send").click(function(event) {
+					send();
+					console.log("sending");
+				});
+			});
+
+			function send() {
+			
+				var text = $("#input").val();
+			
+				var d = new Date();
+			
+				//var userr = firebase.auth().uid();
+			
+				firebase.database().ref('users/' + userr + '/' + d.getTime() + '/').set({
+					request: text
+				});
+						
+				
+				$.ajax({
+					type: "POST",
+					url: baseUrl + "query?v=20150910",
+					contentType: "application/json; charset=utf-8",
+					dataType: "json",
+					headers: {
+						"Authorization": "Bearer " + accessToken
+					},
+					data: JSON.stringify({ query: text, lang: "en", sessionId: "somerandomthing" }),
+					success: function(data) {
+						var data_ss = JSON.stringify(data, undefined, 2);
+						var data_parsed = JSON.parse(data_ss);
+						var speechs = data_parsed.result.fulfillment.speech;
+						console.log(speechs);
+						
+						$("#cake").text(speechs);
+						
+						$("#cake2").show();
+						
+						if (speechs=="Σας ευχαριστούμε.") {
+							var myVar = setInterval(myTimer, 2*1000);
+						}
+						
+					},
+					error: function() {
+						console.log("error");
+					}
+				});
+				console.log("loading");
+			}
+			
+			function goToPayment() {
+				window.location.href = "http://www.paypal.com";
+			}
+			
+			addDialog(160, -150, "Ασφαλιση Αυτοκινητου", "scale(-1, -1)");
+			addDialog(150, 170, "Ασφαλιση Υγειας", "scale(1, -1)");
+			addDialog(140, -360, "Ασφαλιση Οικιας", "scale(-1, -1)");
+			
+			function addDialog(positionX, positionY, dialogText, scaleText){
+				
+				var ss1 = "<a class=\"tagg\" href=\"#\"><div style=\"position:absolute; margin: "+positionX+" 0 0 "+positionY+"; \"><div style=\"position: relative; display: flex; align-items: center;\"><img style=\"position: absolute; transform: "+scaleText+";\" width=\"130\" height=\"130\" src=\"dialog2.png\"/><div style=\"position: absolute; font-weight: bold; color: #4e5562; width: 130px; text-align: center;\">"+dialogText+"</div></div></div></a>";
+			
+				$( "#helll" ).append(ss1);
+			}
+
+		</script>
+	
+	</div>
+</body>
+</html>
+
+
