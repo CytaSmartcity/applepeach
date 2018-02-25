@@ -1,0 +1,270 @@
+
+
+
+<html>
+
+<head>
+
+	<title>ApplePeach</title>
+
+	<link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-social/5.1.1/bootstrap-social.min.css" integrity="sha256-rFMLRbqAytD9ic/37Rnzr2Ycy/RlpxE5QH52h7VoIZo=" crossorigin="anonymous" />
+	
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+	
+	<style>
+		.bg { 
+			/* The image used */
+			background-image: url("cover1.jpg");
+
+			/* Full height */
+			width: 100%; 
+
+			/* Center and scale the image nicely */
+			background-position: center;
+			background-repeat: no-repeat;
+			background-size: cover;
+		}
+		
+		.bg2 { 
+			/* The image used */
+			background-image: url("cover2.jpg");
+
+			/* Full height */
+			width: 100%; 
+			height: 120px;
+			
+			/* Center and scale the image nicely */
+			background-position: center;
+			background-repeat: no-repeat;
+			background-size: cover;
+		}
+		
+		.bg4 { 
+			/* The image used */
+			background-image: url("cover3.jpg");
+
+			/* Full height */
+			width: 100%; 
+			height: 120px;
+			
+			/* Center and scale the image nicely */
+			background-position: center;
+			background-repeat: no-repeat;
+			background-size: cover;
+		}
+		
+		.bg3 { 
+			
+			/* Center and scale the image nicely */
+			background-position: center;
+			background-repeat: repeat;
+			background-size: cover;
+			//background-size: 150px 70px;
+		}
+
+	</style>
+	
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+
+	<script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+
+	<script src="https://www.gstatic.com/firebasejs/4.9.0/firebase.js"></script>
+
+</head>
+
+<nav class="navbar navbar-expand-lg navbar-light bg-faded">
+	<a class="navbar-brand" href="index.html">ApplePeach</a>
+	<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+		<span class="navbar-toggler-icon"></span>
+	</button>
+	<div id="navbarNavDropdown" class="navbar-collapse collapse">
+		<ul class="navbar-nav mr-auto">
+			<li class="nav-item">
+				<a class="nav-link" href="new.html">All Beaches</a>
+			</li>
+			<li class="nav-item">
+				<a class="nav-link" href="#">Take a Photo</a>
+			</li>
+			<li class="nav-item">
+				<a class="nav-link" href="#">Statistics</a>
+			</li>
+		</ul>
+		<ul class="navbar-nav">
+			<li class="nav-item">
+				<a id="signin" class="nav-link" href="sign.html">Sign in</a>
+				<a id="user" class="nav-link" href="user.html" style="display: none;">User</a>
+			</li>
+			<li class="nav-item">
+				<a id="register" class="nav-link" href="register.html">Register</a>
+				<a id="logout" class="nav-link" href="#" style="display: none;">Sign out</a>
+			</li>
+		</ul>
+	</div>
+</nav>
+
+<body>
+
+	<div class="bg">
+		<div style="width:100%; text-align:center; padding:200px;" class="text-white"><div style="background-color:rgba(0, 0, 0, 0.4); border-radius: 15px; padding:20px;"><h1 style="font-size: 4em;">Unforgeable Summer Experiences</h1></div></div>
+	</div>
+	
+	<div class="bg3" style="width: 100%;">
+		<div style="padding:70px 100px;">
+			<h1 style="color: #0099cc; font-weight: bold; text-align: center;">Popular Beaches</h1>
+		</div>
+		
+		<div class="row" style="margin: 0 auto; padding:30px 100px; padding-bottom: 200px;">	
+			<div class="col-md-4" style="padding: 20px;">
+				<div class="text-center" style="padding: 20px;">
+					<img src="beach_serena_bay.jpg" alt="Serena Bay" height="200" width="300">
+				</div>
+				<div style="padding: 20px; text-align:center;">
+					<h4 style="color: #0099cc;">Serena Bay</h4>
+					<span style="color: #0099cc;">Located close to Paralimni</span>
+				</div>
+				<div class="text-center" style="padding: 20px;">
+					<a href="beach1.html"><button type="button" class="btn btn-primary" style="background-color: #0099cc !important; border-color: #0099cc !important;">More</button></a>
+				</div>
+			</div>
+			
+			<div class="col-md-4" style="margin: 0 auto; padding: 20px;">
+				<div class="text-center" style="padding: 20px;">
+					<img src="beach_nissi.jpg" alt="Nissi Beach" height="200" width="300">
+				</div>
+				<div style="padding: 20px; text-align:center;">
+					<h4 style="color: #0099cc;">Nissi Beach</h4>
+					<span style="color: #0099cc;">Located in Ayia Napa</span>
+				</div>
+				<div class="text-center" style="padding: 20px;">
+					<a href="beach1.html"><button type="button" class="btn btn-primary" onclick="'window.location.href='new.html'" style="background-color: #0099cc !important; border-color: #0099cc !important;">More</button></a>
+				</div>
+			</div>
+			
+			<div class="col-md-4" style="margin: 0 auto;  padding: 20px;">
+				<div class="text-center" style="padding: 20px;">
+					<img src="beach_lady_mile.jpg" alt="Nissi Beach" height="200" width="300">
+				</div>
+				<div style="padding: 20px; text-align:center;">
+					<h4 style="color: #0099cc;">Ladys Mile Beach</h4>
+					<span style="color: #0099cc;">Located in Limassol</span>
+				</div>
+				<div class="text-center" style="padding: 20px;">
+					<a href="beach1.html"><button type="button" class="btn btn-primary" style="background-color: #0099cc !important; border-color: #0099cc !important;">More</button></a>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	<div class="bg2">
+	</div>
+	
+	<div class="bg3" style="width: 100%;">
+		<div style="padding:70px 100px;">
+			<h1 style="color: #0099cc; font-weight: bold; text-align: center;">Take a photo</h1>
+		</div>
+		
+		<div class="row" style="margin: 0 auto; padding:30px 100px; padding-bottom: 200px;">	
+			<div class="col-md-4" style="padding: 20px;">
+				<div class="text-center" style="padding: 20px;">
+					<img src="drone3.png" alt="Serena Bay" height="200" width="300">
+				</div>
+			</div>
+			
+			<div class="col-md-8x" style="margin: 0 auto; padding: 20px;">
+				
+				<div style="padding: 20px; text-align:center;">
+					<span style="color: #0099cc;">Request a drone photo and get a photo</span>
+				</div>
+				<div class="text-center" style="padding: 20px;">
+					<button type="button" class="btn btn-primary" onclick="'window.location.href='new.html'" style="background-color: #0099cc !important; border-color: #0099cc !important;">More</button>
+				</div>
+			</div>
+			
+		</div>
+	</div>
+	
+	<div class="bg4">
+	</div>
+	
+	<script>
+	  // Initialize Firebase
+	  // TODO: Replace with your project's customized code snippet
+	  var config = {
+		apiKey: "AIzaSyA7ndgXlwJ40VxblATilxbzcBv2JzAMjhU",
+		authDomain: "applepeachandroid.firebaseapp.com",
+		databaseURL: "https://applepeachandroid.firebaseio.com/",
+		storageBucket: "gs://applepeachandroid.appspot.com",
+		messagingSenderId: "<SENDER_ID>",
+	  };
+	  firebase.initializeApp(config);
+	  
+	</script>
+	
+	<script>
+		
+		firebase.auth().onAuthStateChanged(function(user) {
+		  if (user) {
+			// User is signed in.
+			
+			$("#user").text(user.email);
+			
+			$("#signin").hide();
+			$("#register").hide();
+			$("#user").show();
+			$("#logout").show();
+		  } else {
+			// No user is signed in.
+		  }
+		});
+		
+		$( "#logout" ).click(function() {
+			firebase.auth().signOut().then(function() {
+			  console.log('Signed Out');
+			  location.reload();
+			}, function(error) {
+			  console.error('Sign Out Error', error);
+			});
+		});
+		
+		</script>
+	
+	<div class="row">
+	
+		<div class="col-md-4 text-center" style="padding:30px;">
+			<h5>Other Information</h5>
+			<br/>
+			<a style="color:black" href="#">Terms of Use</a>
+			<br/>
+			<a style="color:black" href="#">Legislations</a>
+			<br/>
+			<a style="color:black" href="#">About us</a>
+		</div>
+		<div class="col-md-4 text-center" style="padding:30px;">
+			<h5>Services</h5>
+			<br/>
+			<a style="color:black" href="#">All Beaches</a>
+			<br/>
+			<a style="color:black" href="#">Take a Photo</a>
+			<br/>
+			<a style="color:black" href="#">Statistics</a>
+		</div>
+		<div class="col-md-4 text-center" style="padding:30px;">
+			<h5>Contact</h5>
+			<br/>
+			<span style="font-weight: bold;">tel:</span> (+357) 99238744
+			<br/>
+			<span style="font-weight: bold;">address:</span> Nikola Nikolaou 1, <br/> Strovolos 2033, Nicosia, Cyprus
+			<br/>
+			<span style="font-weight: bold;">email:</span> support@gmail.com
+		</div>
+	</div>
+	
+</body>
+
+
+
+</html>
+
+
