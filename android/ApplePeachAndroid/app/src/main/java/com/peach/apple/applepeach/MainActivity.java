@@ -109,6 +109,8 @@ public class MainActivity extends AppCompatActivity implements TextureView.Surfa
         mVideoSurface = findViewById(R.id.video_feed);
         mVideoSurface.setVisibility(View.VISIBLE);
 
+
+
         mAuth = FirebaseAuth.getInstance();
         FirebaseUser currentUser = mAuth.getCurrentUser();
 
@@ -122,6 +124,8 @@ public class MainActivity extends AppCompatActivity implements TextureView.Surfa
         //DatabaseReference myRef = database.getReference("message");
         //myRef.setValue("Hello, World!");
         //uploadFile("drawable/", "drone.png", "testing");
+
+        loopForImage();
     }
 
     @Override
@@ -395,10 +399,13 @@ public class MainActivity extends AppCompatActivity implements TextureView.Surfa
 
     private void uploadFile(Uri uri, String filename) {
         //Uri file = Uri.fromFile(new File(localPathname + filename));
-        //Uri uri = Uri.parse("android.resource://com.peach.apple.applepeach/videos/small");
+        //Uri uri = Uri.parse("android.resource://com.peach.apple.applepeach/drawable/drone");
+        String root = Environment.getExternalStorageDirectory().toString();
+        Uri file = Uri.fromFile(new File(root + "/req_images/ImageMTF.jpg"));
+
         StorageReference riversRef = storageRef.child("droneImages/" + filename);
 
-        riversRef.putFile(uri)
+        riversRef.putFile(file)
                 .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                     @Override
                     public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
@@ -425,9 +432,10 @@ public class MainActivity extends AppCompatActivity implements TextureView.Surfa
         Random generator = new Random();
         int n = 10000;
         n =generator.nextInt(n);
-        String fname = "Image-" + n + ".jpg";
+        String fname = "ImageMTF.jpg";
+        //String fname = "image.jpg";
         File file = new File(myDir, fname);
-        Log.i(TAG,""+file);
+        //Log.i("saveBitmap ",""+file);
         if(file.exists())
             file.delete();
         try
@@ -438,6 +446,9 @@ public class MainActivity extends AppCompatActivity implements TextureView.Surfa
             out.close();
 
             Uri uri = Uri.fromFile(new File(root + "/req_images" + fname));
+
+            showToast("saved image");
+
             return uri;
         } catch(Exception e)
         {
@@ -452,14 +463,16 @@ public class MainActivity extends AppCompatActivity implements TextureView.Surfa
             @Override
             public void run() {
                 Bitmap image;
-                int counter = 1;
+                //int counter = 1;
                 while(true) {
                     try {
                         if(isImageReady) {
+                            showToast("empikaaa reee");
                             image = mVideoSurface.getBitmap();
-
-                            uploadFile(saveBitmap(image),"image.jpg");
-                            sleep(5000);
+                            Uri locuri = saveBitmap(image);
+                            sleep(2000);
+                            uploadFile(locuri,"ImageMTF.jpg");
+                            sleep(1000);
                         }
                     }catch(Exception e){
                         e.printStackTrace();
@@ -472,11 +485,7 @@ public class MainActivity extends AppCompatActivity implements TextureView.Surfa
 
     @Override
     public void onSurfaceTextureUpdated(SurfaceTexture surface) {
-
-        if(isImageReady==false){
-            isImageReady = true;
-            loopForImage();
-        }
+        isImageReady = true;
         //mVideoSurface.getBitmap()
         // when texture is updated and the toggle has been activated start the thread for sending the picture
     }
