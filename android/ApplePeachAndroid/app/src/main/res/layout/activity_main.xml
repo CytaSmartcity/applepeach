@@ -15,4 +15,73 @@
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+    <TextureView
+        android:id="@+id/video_feed"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true"
+        android:visibility="invisible" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        tools:layout_editor_absoluteX="0dp"
+        tools:layout_editor_absoluteY="16dp">
+
+        <!-- Widgets in top status bar -->
+
+        <LinearLayout
+            android:id="@+id/signal"
+            android:layout_width="match_parent"
+            android:layout_height="25dp"
+            android:background="@color/dark_gray"
+            android:orientation="horizontal">
+
+            <dji.ui.widget.PreFlightStatusWidget
+                android:id="@+id/status"
+                android:layout_width="238dp"
+                android:layout_height="25dp" />
+
+            <dji.ui.widget.FlightModeWidget
+                android:layout_width="103dp"
+                android:layout_height="22dp" />
+
+            <dji.ui.widget.GPSSignalWidget
+                android:layout_width="44dp"
+                android:layout_height="22dp" />
+
+            <dji.ui.widget.VisionWidget
+                android:layout_width="22dp"
+                android:layout_height="22dp" />
+
+            <dji.ui.widget.RemoteControlSignalWidget
+                android:layout_width="38dp"
+                android:layout_height="22dp" />
+
+            <dji.ui.widget.VideoSignalWidget
+                android:layout_width="38dp"
+                android:layout_height="22dp" />
+
+            <dji.ui.widget.WiFiSignalWidget
+                android:layout_width="22dp"
+                android:layout_height="20dp" />
+
+            <dji.ui.widget.BatteryWidget
+                android:layout_width="56dp"
+                android:layout_height="22dp" />
+
+            <dji.ui.widget.ConnectionWidget
+                android:layout_width="22dp"
+                android:layout_height="22dp"
+                android:layout_marginTop="5dp" />
+        </LinearLayout>
+
+    </LinearLayout>
+    </RelativeLayout>
 </android.support.constraint.ConstraintLayout>
